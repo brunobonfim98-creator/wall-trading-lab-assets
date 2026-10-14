@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wall Trading Lab OAuth</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0f172a;color:#e5e7eb;display:grid;place-items:center;min-height:100vh;margin:0;padding:24px}
+    main{max-width:620px;text-align:center}
+    h1{color:#34d399}
+    code{background:#111827;padding:.15rem .35rem;border-radius:.3rem}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Wall Trading Lab</h1>
+  <p>Autorização recebida. Encaminhando para o aplicativo local…</p>
+  <p>Se nada acontecer, confirme que o Wall Trading Lab está aberto no computador.</p>
+</main>
+<script>
+(() => {
+  const localCallback = "http://127.0.0.1:8787/callback";
+  const query = window.location.search || "";
+  const hash = window.location.hash || "";
+  window.location.replace(localCallback + query + hash);
+})();
+</script>
+</body>
+</html>
