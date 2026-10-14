@@ -8,21 +8,27 @@
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0f172a;color:#e5e7eb;display:grid;place-items:center;min-height:100vh;margin:0;padding:24px}
     main{max-width:620px;text-align:center}
     h1{color:#34d399}
-    code{background:#111827;padding:.15rem .35rem;border-radius:.3rem}
   </style>
 </head>
 <body>
 <main>
   <h1>Wall Trading Lab</h1>
-  <p>Autorização recebida. Encaminhando para o aplicativo local…</p>
-  <p>Se nada acontecer, confirme que o Wall Trading Lab está aberto no computador.</p>
+  <p id="status">OAuth callback endpoint ready.</p>
 </main>
 <script>
 (() => {
+  const params = new URLSearchParams(window.location.search);
+  const hasOAuthResponse = params.has("code") || params.has("error");
+
+  if (!hasOAuthResponse) return;
+
+  document.getElementById("status").textContent =
+    "Autorização recebida. Encaminhando para o aplicativo local…";
+
   const localCallback = "http://127.0.0.1:8787/callback";
-  const query = window.location.search || "";
-  const hash = window.location.hash || "";
-  window.location.replace(localCallback + query + hash);
+  window.location.replace(
+    localCallback + (window.location.search || "") + (window.location.hash || "")
+  );
 })();
 </script>
 </body>
